@@ -1,1 +1,230 @@
-index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DENIZENS | Unique Finds for Everyone</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@400;500&display=swap');
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#faf8f4;color:#302b26;font-family:'DM Sans',sans-serif}
+.top{text-align:center;background:#302b26;color:white;padding:11px;font-size:10px;letter-spacing:2px}
+header{padding:22px 6%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e9e1d6}
+.logo{font-family:'Playfair Display',serif;font-size:28px;letter-spacing:5px}
+.cart{background:none;border:1px solid #796451;padding:10px 13px;cursor:pointer}
+.hero{text-align:center;padding:85px 20px;background:linear-gradient(135deg,#e9dfd1,#f8f4ed,#d9cbbb)}
+.hero small{letter-spacing:4px;color:#806c58}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(40px,8vw,65px);font-weight:400;margin:22px 0}
+.hero p{max-width:420px;margin:0 auto 28px;line-height:1.8;font-size:14px;color:#70665b}
+.button{display:inline-block;background:#302b26;color:white;text-decoration:none;padding:15px 25px;font-size:11px;letter-spacing:2px}
+.section{padding:65px 6%;max-width:1200px;margin:auto}
+.heading{text-align:center;margin-bottom:32px}
+.heading h2{font-family:'Playfair Display',serif;font-weight:400;font-size:34px}
+.heading p{font-size:13px;color:#887d70;margin-top:9px}
+.categories{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.category{background:#e9dfd1;text-align:center;padding:30px 5px}
+.category h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:400}
+.category p{font-size:9px;letter-spacing:1px;margin-top:9px;color:#806c58}
+.filters{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.filters button{padding:10px 16px;border:1px solid #cdbda9;background:transparent;cursor:pointer}
+.filters button.active{background:#302b26;color:white}
+.products{display:grid;grid-template-columns:repeat(2,1fr);gap:25px 14px}
+.product{min-width:0}
+.photo{height:210px;background:#e9dfd1;display:flex;align-items:center;justify-content:center;font-size:55px;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover}
+.product h3{font-family:'Playfair Display',serif;font-weight:400;font-size:18px;margin-top:12px}
+.product p{font-size:11px;color:#887d70;margin-top:5px}
+.price{font-size:14px;margin-top:9px}
+.add{width:100%;padding:12px;margin-top:12px;background:transparent;border:1px solid #796451;cursor:pointer;font-size:11px;letter-spacing:1px}
+.add:hover{background:#302b26;color:white}
+.about{background:#e9dfd1;text-align:center;padding:65px 20px}
+.about h2{font:400 32px 'Playfair Display',serif}
+.about p{max-width:470px;margin:18px auto;line-height:1.9;font-size:13px;color:#70665b}
+.cartbox{background:white;border:1px solid #e9e1d6;padding:22px;margin-top:25px}
+.cartbox h3{font:400 24px 'Playfair Display',serif;margin-bottom:15px}
+.cartline{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #eee;font-size:13px}
+.remove{border:0;background:none;color:#986b59;cursor:pointer}
+.total{display:flex;justify-content:space-between;margin:20px 0;font-weight:600}
+.checkout{width:100%;padding:15px;background:#302b26;color:white;border:0;cursor:pointer;letter-spacing:1px}
+footer{background:#302b26;color:white;text-align:center;padding:35px 15px}
+footer .logo{font-size:23px}
+footer p{font-size:11px;color:#c9bcae;margin-top:12px}
+@media(min-width:700px){.products{grid-template-columns:repeat(4,1fr)}.photo{height:270px}}
+</style>
+</head>
+
+<body>
+<div class="top">UNIQUE FINDS FOR EVERYONE ♡</div>
+
+<header>
+<div class="logo">DENIZENS</div>
+<button class="cart" onclick="document.getElementById('shopping-cart').scrollIntoView({behavior:'smooth'})">
+BAG (<span id="count">0</span>)
+</button>
+</header>
+
+<section class="hero">
+<small>DISCOVER SOMETHING DIFFERENT</small>
+<h1>A world of little<br>discoveries.</h1>
+<p>Unique finds, beautiful details and everyday essentials for women, men and little ones.</p>
+<a class="button" href="#shop">EXPLORE THE COLLECTION</a>
+</section>
+
+<section class="section">
+<div class="heading">
+<h2>Our World</h2>
+<p>Something special for everyone.</p>
+</div>
+<div class="categories">
+<div class="category"><h3>HER</h3><p>FOR HER</p></div>
+<div class="category"><h3>HIM</h3><p>FOR HIM</p></div>
+<div class="category"><h3>LITTLE ONES</h3><p>FOR THE LITTLE ONES</p></div>
+</div>
+</section>
+
+<section class="section" id="shop">
+<div class="heading">
+<h2>Curated Finds</h2>
+<p>Discover your next favourite thing.</p>
+</div>
+
+<div class="filters">
+<button class="active" onclick="filterItems('All',this)">All</button>
+<button onclick="filterItems('Women',this)">Her</button>
+<button onclick="filterItems('Men',this)">Him</button>
+<button onclick="filterItems('Kids',this)">Little Ones</button>
+</div>
+
+<div class="products" id="products"></div>
+
+<div class="cartbox" id="shopping-cart">
+<h3>Your Shopping Bag</h3>
+<div id="cart-items">Your bag is empty ♡</div>
+<div class="total"><span>Total</span><span id="total">$0.00</span></div>
+<button class="checkout" onclick="checkout()">ORDER VIA WHATSAPP</button>
+</div>
+</section>
+
+<section class="about">
+<h2>A little more about us</h2>
+<p>DENIZENS is a place for discovering the unexpected. Unique finds, beautiful details and little things that make everyday life special. Curated for her, him and the little ones.</p>
+</section>
+
+<footer>
+<div class="logo">DENIZENS</div>
+<p>UNIQUE FINDS FOR EVERYONE.</p>
+<p>Thank you for discovering us ♡</p>
+</footer>
+
+<script>
+const products = [
+{name:"Everyday Mini Bag",category:"Women",price:18,emoji:"👜"},
+{name:"Chic Hair Claw Set",category:"Women",price:7,emoji:"🎀"},
+{name:"Travel Makeup Organizer",category:"Women",price:12,emoji:"🧳"},
+{name:"Statement Sunglasses",category:"Women",price:10,emoji:"🕶️"},
+{name:"Minimalist Wallet",category:"Men",price:15,emoji:"👝"},
+{name:"Everyday Cap",category:"Men",price:9,emoji:"🧢"},
+{name:"Travel Organizer",category:"Men",price:13,emoji:"🎒"},
+{name:"Mini Kids Backpack",category:"Kids",price:16,emoji:"🎒"},
+{name:"Cute Lunch Bag",category:"Kids",price:11,emoji:"🍱"},
+{name:"Kids Pencil Case",category:"Kids",price:6,emoji:"✏️"}
+];
+
+let bag=[];
+
+function showProducts(category="All"){
+const area=document.getElementById("products");
+area.innerHTML="";
+products.filter(p=>category==="All"||p.category===category).forEach(p=>{
+const card=document.createElement("div");
+card.className="product";
+
+const photo=document.createElement("div");
+photo.className="photo";
+photo.textContent=p.emoji;
+
+const name=document.createElement("h3");
+name.textContent=p.name;
+
+const type=document.createElement("p");
+type.textContent=p.category;
+
+const price=document.createElement("div");
+price.className="price";
+price.textContent="$"+p.price.toFixed(2);
+
+const add=document.createElement("button");
+add.className="add";
+add.textContent="ADD TO BAG";
+add.onclick=()=>addToBag(p.name);
+
+card.append(photo,name,type,price,add);
+area.appendChild(card);
+});
+}
+
+function filterItems(category,button){
+document.querySelectorAll(".filters button").forEach(b=>b.classList.remove("active"));
+button.classList.add("active");
+showProducts(category);
+}
+
+function addToBag(name){
+bag.push(name);
+updateBag();
+}
+
+function removeItem(index){
+bag.splice(index,1);
+updateBag();
+}
+
+function updateBag(){
+document.getElementById("count").textContent=bag.length;
+const area=document.getElementById("cart-items");
+area.innerHTML="";
+
+if(bag.length===0){
+area.textContent="Your bag is empty ♡";
+}
+
+bag.forEach((name,index)=>{
+const p=products.find(x=>x.name===name);
+const line=document.createElement("div");
+line.className="cartline";
+
+const label=document.createElement("span");
+label.textContent=name+" — $"+p.price.toFixed(2);
+
+const remove=document.createElement("button");
+remove.className="remove";
+remove.textContent="Remove";
+remove.onclick=()=>removeItem(index);
+
+line.append(label,remove);
+area.appendChild(line);
+});
+
+const total=bag.reduce((sum,name)=>sum+products.find(p=>p.name===name).price,0);
+document.getElementById("total").textContent="$"+total.toFixed(2);
+}
+
+function checkout(){
+if(bag.length===0){
+alert("Your shopping bag is empty!");
+return;
+}
+
+const total=bag.reduce((sum,name)=>sum+products.find(p=>p.name===name).price,0);
+const message="Hello DENIZENS! I would like to order:\n"+bag.join("\n")+"\nTotal: $"+total.toFixed(2);
+const phone="96179020656";
+
+window.open("https://wa.me/"+phone+"?text="+encodeURIComponent(message),"_blank");
+}
+
+showProducts();
+</script>
+</body>
+</html>
